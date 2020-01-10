@@ -1,10 +1,6 @@
 ## `S4` -- Königreich der Tiere
-
-```{r, animal_utils, code=readLines("s4-animal/animal-utils.R"), echo=FALSE}
-```
-```{r, animal_mkname, code=readLines("s4-animal/animal-make-name.R"), echo=FALSE}
-```
-```{r, animal_def, code=c(readLines("s4-animal/animal-class.R"), readLines("s4-animal/animal-constructor.R"), readLines("s4-animal/animal-meet.R"), readLines("s4-animal/animal-show.R")), echo=FALSE, results = "hide"}
+```{r, loadclasses, error=TRUE}
+source("s4-animal-classes.R")
 ```
 Beachten Sie bitte auch die Hinweise am Ende der Aufgabenstellung.
 
@@ -69,12 +65,31 @@ Implementieren Sie `meet`-Methoden die entsprechende Strings zurückgeben und ü
 Ihre Methoden für die verschiedenen Kombinationen von `prey` und/oder `predator` sollten `callNextMethod()` benutzen und möglichst viel von der Funktionalität, die alle Methoden gemeinsam haben, in eine Methode mit Signatur (`animal`, `animal`) auslagern (*Don't repeat yourself!*).
 
 Beispiel:
-```{r, code = readLines("s4-animal/animal-test.R")}
+```{r, code = readLines("s4-animal-meet-methods.R"), echo = FALSE}
+
+```
+```{r, animal_constructor_test2, error=TRUE}
+set.seed(20191121)
+animals <- list(
+  mouse(female = TRUE),
+  rabbit(),
+  hawk(female = TRUE),
+  deer(),
+  lynx(female = TRUE),
+  lynx(female = FALSE),
+  deer(),
+  mouse(female = FALSE),
+  deer(female = TRUE)
+)
+
+for (animal1 in animals[1:5]) {
+  for (animal2 in animals[9:5]) {
+    cat(meet(animal1, animal2))
+  }
+}
 ```
 *Hinweise:* 
 
 * Bei der Entwicklung von `S4`-Modulen empfiehlt es sich bevor man modifizierte Klassendefinitionen, Konstruktorfunktionen etc. neu lädt die `R`-Session neu zu starten, da sonst manchmal bereits definierte Klassen & Konstruktoren in die Quere kommen können. 
 * Benutzen Sie -- wenn Sie wollen -- `make_name()` um Namen für die Tiere auszuwürfeln:
-```{r, animal_mkname2, code=readLines("s4-animal/animal-make-name.R"), echo=TRUE}
-```
 * Die Namen und konkreten Ereignisse die ihr Code generiert werden zufallsbedingt nicht genau den obigen entsprechen, das macht natürlich nichts.

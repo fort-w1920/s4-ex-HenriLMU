@@ -54,7 +54,7 @@ mouse <- function(name = make_name(sample(3:10,size = 1)),
 rabbit <- function(name = make_name(sample(3:10,size = 1)),
                    weight = runif(1, min = 1, max = 5),
                    female = sample(c(TRUE, FALSE), 1),
-                   hide = runif(1, min = 0.3, max = 1)) {
+                   hide = runif(1, min = 0.3, max = 0.8)) {
   
   weight <- as.double(weight)
   female <- as.logical(female)
